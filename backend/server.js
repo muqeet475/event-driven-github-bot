@@ -99,6 +99,22 @@ app.get("/repos", async (req, res) => {
   }
 });
 
+// GitHub Webhook Endpoint
+app.post("/webhook/github", (req, res) => {
+  const event = req.headers["x-github-event"];
+
+  console.log("=================================");
+  console.log("GitHub Event Received");
+  console.log("Event Type:", event);
+  console.log("Payload:", req.body);
+  console.log("=================================");
+
+  res.status(200).json({
+    message: "Webhook received",
+    event: event,
+  });
+});
+
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
