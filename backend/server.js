@@ -148,7 +148,13 @@ app.post("/webhook/github", async (req, res) => {
 
     console.log("=================================");
     console.log("GitHub Event Received");
-    console.log("Event Type:", event);
+   console.log("Event Type:", event);
+
+if (event === "issues" && req.body.action === "opened") {
+  console.log("BOT ACTION: New bug issue detected");
+}
+
+console.log("=================================");
     console.log("=================================");
 
     const { error } = await supabase
