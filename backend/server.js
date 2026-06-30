@@ -5,6 +5,8 @@ const cors = require("cors");
 const passport = require("passport");
 const session = require("express-session");
 const axios = require("axios");
+const supabase = require("./supabase");
+
 
 require("./config/passport");
 
@@ -36,15 +38,54 @@ app.get(
     scope: ["user:email"],
   })
 );
-
+// GitHub Callback Route
 // GitHub Callback Route
 app.get(
   "/auth/github/callback",
   passport.authenticate("github", {
     failureRedirect: "/",
   }),
-  (req, res) => {
-    res.send(`Welcome ${req.user.username}`);
+  async (req, res) => {
+    try {
+      // Debug logs
+      console.log("=================================");
+      console.log("GITHUB USER:");
+      console.log("ID:", req.user.id);
+      console.log("USERNAME:", req.user.username);
+      console.log(
+        "TOKEN:",
+        req.user.accessToken
+          ? req.user.accessToken.substring(0, 20) + "..."
+          : "NO TOKEN"
+      );
+      console.log("=================================");
+
+      const { data, error } = await supabase
+        .from("users")
+        .upsert(
+          {
+            github_id: String(req.user.id),
+            username: req.user.username,
+            access_token: req.user.accessToken,
+          },
+          {
+            onConflict: "github_id",
+          }
+        )
+        .select();
+
+      console.log("SUPABASE DATA:", data);
+      console.log("SUPABASE ERROR:", error);
+
+      if (error) {
+        return res.status(500).json(error);
+      }
+
+      res.send(`Welcome ${req.user.username}`);
+    } catch (err) {
+      console.log("SERVER ERROR:", err);
+      res.status(500).send("Database error");
+    }
   }
 );
 
@@ -100,23 +141,38 @@ app.get("/repos", async (req, res) => {
 });
 
 // GitHub Webhook Endpoint
-app.post("/webhook/github", (req, res) => {
-  const event = req.headers["x-github-event"];
+// GitHub Webhook Endpoint
+app.post("/webhook/github", async (req, res) => {
+  try {
+    const event = req.headers["x-github-event"];
 
-  console.log("=================================");
-  console.log("GitHub Event Received");
-  console.log("Event Type:", event);
-  console.log("Payload:", req.body);
-  console.log("=================================");
+    console.log("=================================");
+    console.log("GitHub Event Received");
+    console.log("Event Type:", event);
+    console.log("=================================");
 
-  res.status(200).json({
-    message: "Webhook received",
-    event: event,
-  });
-});
+    const { error } = await supabase
+      .from("events")
+      .insert({
+        event_type: event,
+        repository_name: req.body.repository?.full_name || "unknown",
+        action: req.body.action || null,
+        payload: req.body,
+      });
 
-const PORT = process.env.PORT || 5000;
+    if (error) {
+      console.log("Supabase Event Error:", error);
+    }
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+    res.status(200).json({
+      success: true,
+      event: event,
+    });
+  } catch (err) {
+    console.log("Webhook Error:", err);
+
+    res.status(500).json({
+      success: false,
+    });
+  }
 });
