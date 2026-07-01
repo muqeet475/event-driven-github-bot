@@ -287,6 +287,7 @@ https://event-driven-github-bot.onrender.com/events
 ---
 
 ---
+---
 
 # 📸 Project Screenshots
 
@@ -318,20 +319,10 @@ Demonstration of real-time Slack notification sent by the automation bot.
 
 Demonstration of GitHub event logging and bot action history stored in Supabase.
 
-![Events Dashboard](https://raw.githubusercontent.com/muqeet475/event-driven-github-bot/main/events-dashboard.png)
+![Events Dashboard](https://raw.githubusercontent.com/muqeet475/event-driven-github-bot/main/events-dashboard.png.png)
 
 ---
 
-# 🎉 Project Status
-
-✅ GitHub OAuth Authentication Implemented  
-✅ GitHub Webhook Integration Working  
-✅ Automatic GitHub Label Assignment Working  
-✅ Slack Notification Integration Working  
-✅ Supabase Database Logging Working  
-✅ Event Dashboard API Working  
-✅ Public Deployment on Render Completed  
-✅ End-to-End Event Driven Workflow Verified
 # 🎉 Project Status
 
 ✅ GitHub OAuth Authentication Implemented  
