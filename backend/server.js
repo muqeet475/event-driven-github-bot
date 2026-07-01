@@ -152,6 +152,10 @@ app.post("/webhook/github", async (req, res) => {
 
 if (event === "issues" && req.body.action === "opened") {
   console.log("BOT ACTION: New bug issue detected");
+
+  if (req.body.issue.title.toLowerCase().includes("bug")) {
+    console.log("BOT ACTION: Bug issue found");
+  }
 }
 
 console.log("=================================");
