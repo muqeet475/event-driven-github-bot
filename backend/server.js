@@ -148,17 +148,29 @@ app.post("/webhook/github", async (req, res) => {
 
     console.log("=================================");
     console.log("GitHub Event Received");
-   console.log("Event Type:", event);
+    console.log("Event Type:", event);
 
-if (event === "issues" && req.body.action === "opened") {
-  console.log("BOT ACTION: New bug issue detected");
+    // Bot Action
+    if (event === "issues" && req.body.action === "opened") {
+      console.log("BOT ACTION: New bug issue detected");
 
-  if (req.body.issue.title.toLowerCase().includes("bug")) {
-    console.log("BOT ACTION: Bug issue found");
-  }
-}
+      if (req.body.issue.title.toLowerCase().includes("bug")) {
+        console.log("BOT ACTION: Bug issue found");
 
-console.log("=================================");
+        await supabase
+          .from("events")
+          .insert({
+            event_type: "bot_action",
+            repository_name: req.body.repository.full_name,
+            action: "bug_detected",
+            payload: {
+              issue: req.body.issue.title,
+              message: "Bug automatically detected by bot",
+            },
+          });
+      }
+    }
+
     console.log("=================================");
 
     const { error } = await supabase
@@ -185,9 +197,4 @@ console.log("=================================");
       success: false,
     });
   }
-}); 
-const PORT = process.env.PORT || 5000;
-
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
 });
