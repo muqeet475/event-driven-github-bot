@@ -34,9 +34,9 @@ app.get("/", (req, res) => {
 // GitHub Login Route
 app.get(
   "/auth/github",
-  passport.authenticate("github", {
-    scope: ["user:email"],
-  })
+ passport.authenticate("github", {
+  scope: ["user:email", "repo"],
+})
 );
 // GitHub Callback Route
 // GitHub Callback Route
