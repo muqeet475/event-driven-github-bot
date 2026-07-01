@@ -198,6 +198,18 @@ app.post("/webhook/github", async (req, res) => {
     });
   }
 });
+app.get("/events", async (req, res) => {
+  const { data, error } = await supabase
+    .from("events")
+    .select("*")
+    .order("id", { ascending: false });
+
+  if (error) {
+    return res.status(500).json(error);
+  }
+
+  res.json(data);
+});
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
