@@ -151,42 +151,52 @@ app.post("/webhook/github", async (req, res) => {
     console.log("Event Type:", event);
 
     // Bot Action
-    if (event === "issues" && req.body.action === "opened") {
-      console.log("BOT ACTION: New bug issue detected");
+    // Bot Action
+if (event === "issues" && req.body.action === "opened") {
+  console.log("BOT ACTION: New bug issue detected");
 
-      if (req.body.issue.title.toLowerCase().includes("bug")) {
-        console.log("BOT ACTION: Bug issue found");
+  if (req.body.issue.title.toLowerCase().includes("bug")) {
+    console.log("BOT ACTION: Bug issue found");
 
-      await axios.post(
-  `https://api.github.com/repos/${req.body.repository.full_name}/issues/${req.body.issue.number}/labels`,
-  {
-    labels: ["bug"],
-  },
-  {
-    headers: {
-      Authorization: `token ${process.env.GITHUB_PAT}`,
-      Accept: "application/vnd.github+json",
-    },
-  }
-);
-
-console.log("BOT ACTION: Added bug label");
-
-        await supabase
-          .from("events")
-          .insert({
-            event_type: "bot_action",
-            repository_name: req.body.repository.full_name,
-            action: "bug_detected",
-            payload: {
-              issue: req.body.issue.title,
-              message: "Bug automatically detected by bot",
-            },
-          });
+    // Add GitHub label
+    await axios.post(
+      `https://api.github.com/repos/${req.body.repository.full_name}/issues/${req.body.issue.number}/labels`,
+      {
+        labels: ["bug"],
+      },
+      {
+        headers: {
+          Authorization: `token ${process.env.GITHUB_PAT}`,
+          Accept: "application/vnd.github+json",
+        },
       }
-    }
+    );
 
-    console.log("=================================");
+    console.log("BOT ACTION: Added bug label");
+
+    // Send Slack notification
+    await axios.post(process.env.SLACK_WEBHOOK_URL, {
+      text: `🚨 Bug detected in ${req.body.repository.full_name}: ${req.body.issue.title}`,
+    });
+
+    console.log("BOT ACTION: Slack notification sent");
+
+    // Save bot action to Supabase
+    await supabase
+      .from("events")
+      .insert({
+        event_type: "bot_action",
+        repository_name: req.body.repository.full_name,
+        action: "bug_detected",
+        payload: {
+          issue: req.body.issue.title,
+          message: "Bug automatically detected by bot",
+        },
+      });
+  }
+}
+
+console.log("=================================");
 
     const { error } = await supabase
       .from("events")
