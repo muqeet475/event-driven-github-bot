@@ -157,14 +157,14 @@ app.post("/webhook/github", async (req, res) => {
       if (req.body.issue.title.toLowerCase().includes("bug")) {
         console.log("BOT ACTION: Bug issue found");
 
-        await axios.post(
-  req.body.issue.labels_url,
+      await axios.post(
+  `https://api.github.com/repos/${req.body.repository.full_name}/issues/${req.body.issue.number}/labels`,
   {
     labels: ["bug"],
   },
   {
     headers: {
-      Authorization: `token ${process.env.GITHUB_PAT || req.user?.accessToken}`,
+      Authorization: `token ${process.env.GITHUB_PAT}`,
       Accept: "application/vnd.github+json",
     },
   }
