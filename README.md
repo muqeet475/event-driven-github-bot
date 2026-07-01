@@ -284,7 +284,52 @@ https://event-driven-github-bot.onrender.com/events
 ```
 
 ---
+---
 
+# 📸 Project Screenshots
+
+## 🔐 GitHub OAuth Login
+
+Demonstration of successful GitHub OAuth authentication.
+
+![GitHub Login](https://raw.githubusercontent.com/muqeet475/event-driven-github-bot/main/github-login.png)
+
+---
+
+## 🐞 GitHub Issue With Automatic Bug Label
+
+Demonstration of automatic bug detection and GitHub label assignment.
+
+![Bug Label](https://raw.githubusercontent.com/muqeet475/event-driven-github-bot/main/github-bug-label.png)
+
+---
+
+## 💬 Slack Notification
+
+Demonstration of real-time Slack notification sent by the automation bot.
+
+![Slack Notification](https://raw.githubusercontent.com/muqeet475/event-driven-github-bot/main/slack-notification.png.png)
+
+---
+
+## 📊 Event Dashboard
+
+Demonstration of GitHub event logging and bot action history stored in Supabase.
+
+![Events Dashboard](https://raw.githubusercontent.com/muqeet475/event-driven-github-bot/main/events-dashboard.png)
+
+---
+
+# 🎉 Project Status
+
+✅ GitHub OAuth Authentication Implemented  
+✅ GitHub Webhook Integration Working  
+✅ Automatic GitHub Label Assignment Working  
+✅ Slack Notification Integration Working  
+✅ Supabase Database Logging Working  
+✅ Event Dashboard API Working  
+✅ Public Deployment on Render Completed  
+✅ End-to-End Event Driven Workflow Verified
 # 👨‍💻 Author
 
 **Abdul Muqeet Ansari**
@@ -292,35 +337,6 @@ https://event-driven-github-bot.onrender.com/events
 B.Tech Computer Science and Engineering  
 Galgotias University
 
----
-# 📸 Project Screenshots
 
-## GitHub OAuth Login
 
-![GitHub Login](https://raw.githubusercontent.com/muqeet475/event-driven-github-bot/main/github-login.png)
 
----
-
-## GitHub Issue With Automatic Bug Label
-
-![Bug Label](https://raw.githubusercontent.com/muqeet475/event-driven-github-bot/main/github-bug-label.png)
-
----
-
-## Slack Notification
-
-![Slack Notification](https://raw.githubusercontent.com/muqeet475/event-driven-github-bot/main/slack-notification.png.png)
-
----
-
-## Event Dashboard
-
-![Events Dashboard](https://raw.githubusercontent.com/muqeet475/event-driven-github-bot/main/events-dashboard.png)
-# 🎉 Project Status
-
-✅ Completed  
-✅ Fully Deployed  
-✅ GitHub Automation Working  
-✅ Slack Integration Working  
-✅ Database Logging Working  
-✅ Event Dashboard Working
