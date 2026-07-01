@@ -286,21 +286,23 @@ https://event-driven-github-bot.onrender.com/events
 ---
 ---
 
+---
+
 # 📸 Project Screenshots
 
 ## 🔐 GitHub OAuth Login
 
-Demonstration of successful GitHub OAuth authentication.
+Demonstration of successful GitHub OAuth authentication using GitHub OAuth and Passport.js.
 
-![GitHub Login](https://raw.githubusercontent.com/muqeet475/event-driven-github-bot/main/github-login.png)
+![GitHub Login](https://raw.githubusercontent.com/muqeet475/event-driven-github-bot/main/github-login.png.png)
 
 ---
 
 ## 🐞 GitHub Issue With Automatic Bug Label
 
-Demonstration of automatic bug detection and GitHub label assignment.
+Demonstration of automatic bug detection and GitHub label assignment using the GitHub REST API.
 
-![Bug Label](https://raw.githubusercontent.com/muqeet475/event-driven-github-bot/main/github-bug-label.png)
+![Bug Label](https://raw.githubusercontent.com/muqeet475/event-driven-github-bot/main/github-bug-label.png.png)
 
 ---
 
@@ -320,6 +322,16 @@ Demonstration of GitHub event logging and bot action history stored in Supabase.
 
 ---
 
+# 🎉 Project Status
+
+✅ GitHub OAuth Authentication Implemented  
+✅ GitHub Webhook Integration Working  
+✅ Automatic GitHub Label Assignment Working  
+✅ Slack Notification Integration Working  
+✅ Supabase Database Logging Working  
+✅ Event Dashboard API Working  
+✅ Public Deployment on Render Completed  
+✅ End-to-End Event Driven Workflow Verified
 # 🎉 Project Status
 
 ✅ GitHub OAuth Authentication Implemented  
