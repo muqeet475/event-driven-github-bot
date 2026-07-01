@@ -293,7 +293,29 @@ B.Tech Computer Science and Engineering
 Galgotias University
 
 ---
+# 📸 Project Screenshots
 
+## GitHub OAuth Login
+
+![GitHub Login](https://raw.githubusercontent.com/muqeet475/event-driven-github-bot/main/github-login.png)
+
+---
+
+## GitHub Issue With Automatic Bug Label
+
+![Bug Label](https://raw.githubusercontent.com/muqeet475/event-driven-github-bot/main/github-bug-label.png)
+
+---
+
+## Slack Notification
+
+![Slack Notification](https://raw.githubusercontent.com/muqeet475/event-driven-github-bot/main/slack-notification.png.png)
+
+---
+
+## Event Dashboard
+
+![Events Dashboard](https://raw.githubusercontent.com/muqeet475/event-driven-github-bot/main/events-dashboard.png)
 # 🎉 Project Status
 
 ✅ Completed  
